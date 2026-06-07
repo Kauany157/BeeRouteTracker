@@ -1,0 +1,28 @@
+Trabalho: Sistema para "BeeRoute Tracker"
+
+Integrantes: Julio, Kauany Sa
+Disciplina: Algoritmos e Programacao I
+Professora: Dra. Alcilene Dalilia de Sousa
+
+Descricao:
+Sistema de cadastro e monitoramento de abelhas sem ferrao, sensores ambientais associados
+e rastreamento de coleta da startup BeeRoute.
+
+Problema que resolve:
+Ajuda a acompanhar especies de abelhas, sensores ambientais e dados de coleta, permitindo
+identificar distancia percorrida e regioes mais produtivas.
+
+MVP:
+Cadastro de abelhas, cadastro de sensores, relatorios gerais e relatorios comparativos por regiao.
+
+Compilacao:
+gcc main.c functions.c -o BeeRouteTracker
+
+Execucao no Linux:
+./BeeRouteTracker
+
+Execucao no Windows:
+BeeRouteTracker.exe
+
+Bugs conhecidos:
+Ainda nao ha persistencia em arquivo; os dados se perdem ao encerrar o programa.
