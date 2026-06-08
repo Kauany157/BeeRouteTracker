@@ -34,27 +34,14 @@ void manageAbelhas_menu(void);
 void manageSensores_menu(void);
 void manageRelatorios_menu(void);
 
-void gerenciarAbelhas(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int *qtdSensores);
-void gerenciarSensores(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int qtdAbelhas);
-void gerenciarRelatorios(Abelha abelhas[], int qtdAbelhas, Sensor sensores[], int qtdSensores);
+void gerenciarAbelhas(void);
+void gerenciarSensores(void);
+void gerenciarRelatorios(void);
 
-void cadastrarAbelha(Abelha abelhas[], int *qtdAbelhas);
-void listarAbelhas(Abelha abelhas[], int qtdAbelhas);
-void buscarAbelhaPorNome(Abelha abelhas[], int qtdAbelhas);
-void alterarAbelha(Abelha abelhas[], int qtdAbelhas);
-void removerAbelha(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int *qtdSensores);
-
-void cadastrarSensor(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int qtdAbelhas);
-void listarSensores(Sensor sensores[], int qtdSensores);
-void buscarSensorPorIdAbelha(Sensor sensores[], int qtdSensores);
-void alterarSensor(Sensor sensores[], int qtdSensores);
-void removerSensor(Sensor sensores[], int *qtdSensores);
-
-void mediaProducaoMel(Abelha abelhas[], int qtdAbelhas);
-void mediaTemperaturaSensores(Sensor sensores[], int qtdSensores);
-void quantidadeAbelhasPorRegiao(Abelha abelhas[], int qtdAbelhas);
-void relatorioDistanciaTotal(Abelha abelhas[], int qtdAbelhas);
-void relatorioRegiaoMaisProdutiva(Abelha abelhas[], int qtdAbelhas);
-void relatorioComparativoRegioes(Abelha abelhas[], int qtdAbelhas);
+void cadastrarAbelha(void);
+void listarAbelhas(void);
+void buscarAbelhaPorNome(void);
+void alterarAbelha(void);
+void removerAbelha(void);
 
 #endif
