@@ -9,7 +9,7 @@ Sensor sensores[MAX_SENSORES];
 int qtdAbelhas = 0;
 int qtdSensores = 0;
 
-void limpar_tela() {
+void limpar_tela(void) {
     #ifdef _WIN32
         system("cls");
     #else
@@ -17,12 +17,12 @@ void limpar_tela() {
     #endif
 }
 
-void pausar() {
+void pausar(void) {
     printf("\nPressione ENTER para continuar...");
     getchar();
 }
 
-void limparBuffer() {
+void limparBuffer(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
 }
@@ -32,7 +32,7 @@ void lerTexto(char texto[], int tamanho) {
     texto[strcspn(texto, "\n")] = '\0';
 }
 
-void menu() {
+void menu(void) {
     limpar_tela();
     printf("===== SISTEMA BEEROUTE TRACKER =====\n");
     printf("1. Gerenciar Abelhas\n");
@@ -46,6 +46,7 @@ int confirmarOpcao1(int opcao) {
     char confirmacao;
 
     printf("Voce quer mesmo ");
+
     switch (opcao) {
         case 1:
             printf("acessar Gerenciar Abelhas");
@@ -80,7 +81,7 @@ int confirmarOpcao1(int opcao) {
     }
 }
 
-void manageAbelhas_menu() {
+void manageAbelhas_menu(void) {
     limpar_tela();
     printf("===== GERENCIAR ABELHAS =====\n");
     printf("6. Cadastrar Abelha\n");
@@ -92,7 +93,7 @@ void manageAbelhas_menu() {
     printf("Escolha uma opcao: ");
 }
 
-void manageSensores_menu() {
+void manageSensores_menu(void) {
     limpar_tela();
     printf("===== GERENCIAR SENSORES =====\n");
     printf("6. Cadastrar Sensor\n");
@@ -104,7 +105,7 @@ void manageSensores_menu() {
     printf("Escolha uma opcao: ");
 }
 
-void manageRelatorios_menu() {
+void manageRelatorios_menu(void) {
     limpar_tela();
     printf("===== RELATORIOS =====\n");
     printf("4. Media Geral de Producao de Mel\n");
@@ -117,7 +118,7 @@ void manageRelatorios_menu() {
     printf("Escolha uma opcao: ");
 }
 
-int procurarAbelhaPorId(Abelha abelhas[], int qtdAbelhas, int id) {
+int procurarAbelhaPorId(int id) {
     for (int i = 0; i < qtdAbelhas; i++) {
         if (abelhas[i].id == id) {
             return i;
@@ -126,19 +127,28 @@ int procurarAbelhaPorId(Abelha abelhas[], int qtdAbelhas, int id) {
     return -1;
 }
 
-void atualizarIdsAbelhas(Abelha abelhas[], int qtdAbelhas) {
+int procurarSensorPorId(int id) {
+    for (int i = 0; i < qtdSensores; i++) {
+        if (sensores[i].id == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void atualizarIdsAbelhas(void) {
     for (int i = 0; i < qtdAbelhas; i++) {
         abelhas[i].id = i + 1;
     }
 }
 
-void atualizarIdsSensores(Sensor sensores[], int qtdSensores) {
+void atualizarIdsSensores(void) {
     for (int i = 0; i < qtdSensores; i++) {
         sensores[i].id = i + 1;
     }
 }
 
-void gerenciarAbelhas(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int *qtdSensores) {
+void gerenciarAbelhas(void) {
     int opcao;
 
     do {
@@ -154,19 +164,19 @@ void gerenciarAbelhas(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int 
 
         switch (opcao) {
             case 6:
-                cadastrarAbelha(abelhas, qtdAbelhas);
+                cadastrarAbelha();
                 break;
             case 7:
-                listarAbelhas(abelhas, *qtdAbelhas);
+                listarAbelhas();
                 break;
             case 8:
-                buscarAbelhaPorNome(abelhas, *qtdAbelhas);
+                buscarAbelhaPorNome();
                 break;
             case 9:
-                alterarAbelha(abelhas, *qtdAbelhas);
+                alterarAbelha();
                 break;
             case 10:
-                removerAbelha(abelhas, qtdAbelhas, sensores, qtdSensores);
+                removerAbelha();
                 break;
             case 11:
                 return;
@@ -178,7 +188,7 @@ void gerenciarAbelhas(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int 
     } while (opcao != 11);
 }
 
-void gerenciarSensores(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int qtdAbelhas) {
+void gerenciarSensores(void) {
     int opcao;
 
     do {
@@ -194,19 +204,19 @@ void gerenciarSensores(Sensor sensores[], int *qtdSensores, Abelha abelhas[], in
 
         switch (opcao) {
             case 6:
-                cadastrarSensor(sensores, qtdSensores, abelhas, qtdAbelhas);
+                cadastrarSensor();
                 break;
             case 7:
-                listarSensores(sensores, *qtdSensores);
+                listarSensores();
                 break;
             case 8:
-                buscarSensorPorIdAbelha(sensores, *qtdSensores);
+                buscarSensorPorIdAbelha();
                 break;
             case 9:
-                alterarSensor(sensores, *qtdSensores);
+                alterarSensor();
                 break;
             case 10:
-                removerSensor(sensores, qtdSensores);
+                removerSensor();
                 break;
             case 11:
                 return;
@@ -218,7 +228,7 @@ void gerenciarSensores(Sensor sensores[], int *qtdSensores, Abelha abelhas[], in
     } while (opcao != 11);
 }
 
-void gerenciarRelatorios(Abelha abelhas[], int qtdAbelhas, Sensor sensores[], int qtdSensores) {
+void gerenciarRelatorios(void) {
     int opcao;
 
     do {
@@ -234,22 +244,22 @@ void gerenciarRelatorios(Abelha abelhas[], int qtdAbelhas, Sensor sensores[], in
 
         switch (opcao) {
             case 4:
-                mediaProducaoMel(abelhas, qtdAbelhas);
+                mediaProducaoMel();
                 break;
             case 5:
-                mediaTemperaturaSensores(sensores, qtdSensores);
+                mediaTemperaturaSensores();
                 break;
             case 6:
-                quantidadeAbelhasPorRegiao(abelhas, qtdAbelhas);
+                quantidadeAbelhasPorRegiao();
                 break;
             case 7:
-                relatorioDistanciaTotal(abelhas, qtdAbelhas);
+                relatorioDistanciaTotal();
                 break;
             case 8:
-                relatorioRegiaoMaisProdutiva(abelhas, qtdAbelhas);
+                relatorioRegiaoMaisProdutiva();
                 break;
             case 9:
-                relatorioComparativoRegioes(abelhas, qtdAbelhas);
+                relatorioComparativoRegioes();
                 break;
             case 10:
                 return;
@@ -262,13 +272,13 @@ void gerenciarRelatorios(Abelha abelhas[], int qtdAbelhas, Sensor sensores[], in
 }
 
 void cadastrarAbelha(void) {
-    if (*qtdAbelhas >= MAX_ABELHAS) {
+    if (qtdAbelhas >= MAX_ABELHAS) {
         printf("Limite maximo de abelhas atingido.\n");
         return;
     }
 
     Abelha nova;
-    nova.id = *qtdAbelhas + 1;
+    nova.id = qtdAbelhas + 1;
 
     printf("Nome popular: ");
     lerTexto(nova.nomePopular, 40);
@@ -289,8 +299,8 @@ void cadastrarAbelha(void) {
 
     nova.IA = 0;
 
-    abelhas[*qtdAbelhas] = nova;
-    (*qtdAbelhas)++;
+    abelhas[qtdAbelhas] = nova;
+    qtdAbelhas++;
 
     printf("Abelha cadastrada com sucesso.\n");
 }
@@ -345,13 +355,13 @@ void alterarAbelha(void) {
         return;
     }
 
-    listarAbelhas(abelhas, qtdAbelhas);
+    listarAbelhas();
 
     printf("\nDigite o ID da abelha que deseja alterar: ");
     scanf("%d", &id);
     limparBuffer();
 
-    pos = procurarAbelhaPorId(abelhas, qtdAbelhas, id);
+    pos = procurarAbelhaPorId(id);
 
     if (pos == -1) {
         printf("Abelha nao encontrada.\n");
@@ -382,18 +392,18 @@ void removerAbelha(void) {
     int id, pos;
     char confirmar;
 
-    if (*qtdAbelhas == 0) {
+    if (qtdAbelhas == 0) {
         printf("Nenhuma abelha cadastrada.\n");
         return;
     }
 
-    listarAbelhas(abelhas, *qtdAbelhas);
+    listarAbelhas();
 
     printf("\nDigite o ID da abelha que deseja remover: ");
     scanf("%d", &id);
     limparBuffer();
 
-    pos = procurarAbelhaPorId(abelhas, *qtdAbelhas, id);
+    pos = procurarAbelhaPorId(id);
 
     if (pos == -1) {
         printf("Abelha nao encontrada.\n");
@@ -409,35 +419,35 @@ void removerAbelha(void) {
         return;
     }
 
-    for (int i = pos; i < *qtdAbelhas - 1; i++) {
+    for (int i = pos; i < qtdAbelhas - 1; i++) {
         abelhas[i] = abelhas[i + 1];
     }
 
-    (*qtdAbelhas)--;
-    atualizarIdsAbelhas(abelhas, *qtdAbelhas);
+    qtdAbelhas--;
+    atualizarIdsAbelhas();
 
-    for (int i = 0; i < *qtdSensores; i++) {
+    for (int i = 0; i < qtdSensores; i++) {
         if (sensores[i].idAbelha == id) {
-            for (int j = i; j < *qtdSensores - 1; j++) {
+            for (int j = i; j < qtdSensores - 1; j++) {
                 sensores[j] = sensores[j + 1];
             }
-            (*qtdSensores)--;
+            qtdSensores--;
             i--;
         } else if (sensores[i].idAbelha > id) {
             sensores[i].idAbelha--;
         }
     }
 
-    atualizarIdsSensores(sensores, *qtdSensores);
+    atualizarIdsSensores();
 
     printf("Abelha removida com sucesso.\n");
 }
 
-void cadastrarSensor(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int qtdAbelhas) {
+void cadastrarSensor(void) {
     Sensor novo;
     int idAbelha;
 
-    if (*qtdSensores >= MAX_SENSORES) {
+    if (qtdSensores >= MAX_SENSORES) {
         printf("Limite maximo de sensores atingido.\n");
         return;
     }
@@ -447,18 +457,18 @@ void cadastrarSensor(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int 
         return;
     }
 
-    listarAbelhas(abelhas, qtdAbelhas);
+    listarAbelhas();
 
     printf("\nDigite o ID da abelha vinculada: ");
     scanf("%d", &idAbelha);
     limparBuffer();
 
-    if (procurarAbelhaPorId(abelhas, qtdAbelhas, idAbelha) == -1) {
+    if (procurarAbelhaPorId(idAbelha) == -1) {
         printf("ID de abelha invalido.\n");
         return;
     }
 
-    novo.id = *qtdSensores + 1;
+    novo.id = qtdSensores + 1;
 
     printf("Tipo do sensor (temperatura, umidade ou luminosidade): ");
     lerTexto(novo.tipo, 30);
@@ -470,13 +480,13 @@ void cadastrarSensor(Sensor sensores[], int *qtdSensores, Abelha abelhas[], int 
     novo.idAbelha = idAbelha;
     novo.Abelha = 0;
 
-    sensores[*qtdSensores] = novo;
-    (*qtdSensores)++;
+    sensores[qtdSensores] = novo;
+    qtdSensores++;
 
     printf("Sensor cadastrado com sucesso.\n");
 }
 
-void listarSensores(Sensor sensores[], int qtdSensores) {
+void listarSensores(void) {
     if (qtdSensores == 0) {
         printf("Nenhum sensor cadastrado.\n");
         return;
@@ -492,7 +502,7 @@ void listarSensores(Sensor sensores[], int qtdSensores) {
     }
 }
 
-void buscarSensorPorIdAbelha(Sensor sensores[], int qtdSensores) {
+void buscarSensorPorIdAbelha(void) {
     int idAbelha;
     int encontrou = 0;
 
@@ -514,26 +524,21 @@ void buscarSensorPorIdAbelha(Sensor sensores[], int qtdSensores) {
     }
 }
 
-void alterarSensor(Sensor sensores[], int qtdSensores) {
-    int id, pos = -1;
+void alterarSensor(void) {
+    int id, pos;
 
     if (qtdSensores == 0) {
         printf("Nenhum sensor cadastrado.\n");
         return;
     }
 
-    listarSensores(sensores, qtdSensores);
+    listarSensores();
 
     printf("\nDigite o ID do sensor que deseja alterar: ");
     scanf("%d", &id);
     limparBuffer();
 
-    for (int i = 0; i < qtdSensores; i++) {
-        if (sensores[i].id == id) {
-            pos = i;
-            break;
-        }
-    }
+    pos = procurarSensorPorId(id);
 
     if (pos == -1) {
         printf("Sensor nao encontrado.\n");
@@ -550,27 +555,22 @@ void alterarSensor(Sensor sensores[], int qtdSensores) {
     printf("Sensor alterado com sucesso.\n");
 }
 
-void removerSensor(Sensor sensores[], int *qtdSensores) {
-    int id, pos = -1;
+void removerSensor(void) {
+    int id, pos;
     char confirmar;
 
-    if (*qtdSensores == 0) {
+    if (qtdSensores == 0) {
         printf("Nenhum sensor cadastrado.\n");
         return;
     }
 
-    listarSensores(sensores, *qtdSensores);
+    listarSensores();
 
     printf("\nDigite o ID do sensor que deseja remover: ");
     scanf("%d", &id);
     limparBuffer();
 
-    for (int i = 0; i < *qtdSensores; i++) {
-        if (sensores[i].id == id) {
-            pos = i;
-            break;
-        }
-    }
+    pos = procurarSensorPorId(id);
 
     if (pos == -1) {
         printf("Sensor nao encontrado.\n");
@@ -586,17 +586,17 @@ void removerSensor(Sensor sensores[], int *qtdSensores) {
         return;
     }
 
-    for (int i = pos; i < *qtdSensores - 1; i++) {
+    for (int i = pos; i < qtdSensores - 1; i++) {
         sensores[i] = sensores[i + 1];
     }
 
-    (*qtdSensores)--;
-    atualizarIdsSensores(sensores, *qtdSensores);
+    qtdSensores--;
+    atualizarIdsSensores();
 
     printf("Sensor removido com sucesso.\n");
 }
 
-void mediaProducaoMel(Abelha abelhas[], int qtdAbelhas) {
+void mediaProducaoMel(void) {
     float soma = 0;
 
     if (qtdAbelhas == 0) {
@@ -611,7 +611,7 @@ void mediaProducaoMel(Abelha abelhas[], int qtdAbelhas) {
     printf("Media geral de producao de mel: %.2f kg/mes\n", soma / qtdAbelhas);
 }
 
-void mediaTemperaturaSensores(Sensor sensores[], int qtdSensores) {
+void mediaTemperaturaSensores(void) {
     float soma = 0;
     int qtdTemperatura = 0;
 
@@ -630,7 +630,7 @@ void mediaTemperaturaSensores(Sensor sensores[], int qtdSensores) {
     printf("Media de temperatura dos sensores: %.2f\n", soma / qtdTemperatura);
 }
 
-void quantidadeAbelhasPorRegiao(Abelha abelhas[], int qtdAbelhas) {
+void quantidadeAbelhasPorRegiao(void) {
     int jaContada;
 
     if (qtdAbelhas == 0) {
@@ -664,7 +664,7 @@ void quantidadeAbelhasPorRegiao(Abelha abelhas[], int qtdAbelhas) {
     }
 }
 
-void relatorioDistanciaTotal(Abelha abelhas[], int qtdAbelhas) {
+void relatorioDistanciaTotal(void) {
     float total = 0;
 
     if (qtdAbelhas == 0) {
@@ -679,7 +679,7 @@ void relatorioDistanciaTotal(Abelha abelhas[], int qtdAbelhas) {
     printf("Distancia total percorrida nas coletas: %.2f km\n", total);
 }
 
-void relatorioRegiaoMaisProdutiva(Abelha abelhas[], int qtdAbelhas) {
+void relatorioRegiaoMaisProdutiva(void) {
     char melhorRegiao[30];
     float maiorProducao = -1;
 
@@ -717,7 +717,7 @@ void relatorioRegiaoMaisProdutiva(Abelha abelhas[], int qtdAbelhas) {
     printf("Producao total da regiao: %.2f kg/mes\n", maiorProducao);
 }
 
-void relatorioComparativoRegioes(Abelha abelhas[], int qtdAbelhas) {
+void relatorioComparativoRegioes(void) {
     if (qtdAbelhas == 0) {
         printf("Nenhuma abelha cadastrada.\n");
         return;
