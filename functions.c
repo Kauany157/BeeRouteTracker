@@ -3,6 +3,12 @@
 #include <string.h>
 #include "functions.h"
 
+Abelha abelhas[MAX_ABELHAS];
+Sensor sensores[MAX_SENSORES];
+
+int qtdAbelhas = 0;
+int qtdSensores = 0;
+
 void limpar_tela() {
     #ifdef _WIN32
         system("cls");
