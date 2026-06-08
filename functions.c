@@ -261,7 +261,7 @@ void gerenciarRelatorios(Abelha abelhas[], int qtdAbelhas, Sensor sensores[], in
     } while (opcao != 10);
 }
 
-void cadastrarAbelha(Abelha abelhas[], int *qtdAbelhas) {
+void cadastrarAbelha(void) {
     if (*qtdAbelhas >= MAX_ABELHAS) {
         printf("Limite maximo de abelhas atingido.\n");
         return;
@@ -295,7 +295,7 @@ void cadastrarAbelha(Abelha abelhas[], int *qtdAbelhas) {
     printf("Abelha cadastrada com sucesso.\n");
 }
 
-void listarAbelhas(Abelha abelhas[], int qtdAbelhas) {
+void listarAbelhas(void) {
     if (qtdAbelhas == 0) {
         printf("Nenhuma abelha cadastrada.\n");
         return;
@@ -313,7 +313,7 @@ void listarAbelhas(Abelha abelhas[], int qtdAbelhas) {
     }
 }
 
-void buscarAbelhaPorNome(Abelha abelhas[], int qtdAbelhas) {
+void buscarAbelhaPorNome(void) {
     char nome[40];
     int encontrou = 0;
 
@@ -337,7 +337,7 @@ void buscarAbelhaPorNome(Abelha abelhas[], int qtdAbelhas) {
     }
 }
 
-void alterarAbelha(Abelha abelhas[], int qtdAbelhas) {
+void alterarAbelha(void) {
     int id, pos;
 
     if (qtdAbelhas == 0) {
@@ -378,7 +378,7 @@ void alterarAbelha(Abelha abelhas[], int qtdAbelhas) {
     printf("Dados alterados com sucesso.\n");
 }
 
-void removerAbelha(Abelha abelhas[], int *qtdAbelhas, Sensor sensores[], int *qtdSensores) {
+void removerAbelha(void) {
     int id, pos;
     char confirmar;
 
