@@ -30,6 +30,7 @@ void limpar_tela(void);
 void pausar(void);
 void menu(void);
 int confirmarOpcao1(int opcao);
+
 void manageAbelhas_menu(void);
 void manageSensores_menu(void);
 void manageRelatorios_menu(void);
@@ -43,5 +44,18 @@ void listarAbelhas(void);
 void buscarAbelhaPorNome(void);
 void alterarAbelha(void);
 void removerAbelha(void);
+
+void cadastrarSensor(void);
+void listarSensores(void);
+void buscarSensorPorIdAbelha(void);
+void alterarSensor(void);
+void removerSensor(void);
+
+void mediaProducaoMel(void);
+void mediaTemperaturaSensores(void);
+void quantidadeAbelhasPorRegiao(void);
+void relatorioDistanciaTotal(void);
+void relatorioRegiaoMaisProdutiva(void);
+void relatorioComparativoRegioes(void);
 
 #endif
