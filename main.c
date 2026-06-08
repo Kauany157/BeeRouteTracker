@@ -3,10 +3,6 @@
 
 int main(void) {
     int opcao, saiu = 0;
-    Abelha abelhas[MAX_ABELHAS];
-    Sensor sensores[MAX_SENSORES];
-    int qtdAbelhas = 0;
-    int qtdSensores = 0;
 
     do {
         menu();
@@ -30,13 +26,13 @@ int main(void) {
 
         switch (opcao) {
             case 1:
-                gerenciarAbelhas(abelhas, &qtdAbelhas, sensores, &qtdSensores);
+               gerenciarAbelhas();
                 break;
             case 2:
-                gerenciarSensores(sensores, &qtdSensores, abelhas, qtdAbelhas);
+                gerenciarSensores();
                 break;
             case 3:
-                gerenciarRelatorios(abelhas, qtdAbelhas, sensores, qtdSensores);
+               gerenciarRelatorios();
                 break;
             case 4:
                 printf("Voce saiu.\n");
